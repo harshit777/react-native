@@ -1,0 +1,17 @@
+firebase integration with react for authentication of the login form
+
+handling input
+validate info
+
+for app auth we will make a class based component
+req.(class component) must include a render method and it should render some jsx.
+
+firebase online database that will connect to our app will automatically connect our app
+update componenets directly will be updated to our consumers 
+authentiation can also be done using firebase for login form 
+
+componentWillMount is a life cycle method which will run firebase component before initialzing the main header and content of the app
+
+textfields for login form
+
+using state for feedback from the user in a state of an event \

@@ -1,0 +1,22 @@
+using git bash 
+
+first verify the user name and email
+
+git config --global user.name "username"
+git config --global user.email email-id
+
+then clone your repository by command
+
+git clone url-of-the-repository
+
+add file 
+
+git add filename
+
+to check status 
+
+git status
+
+to commit: git commit -m "message" filename
+
+transfer to git account: git push -u origin master
