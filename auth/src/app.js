@@ -1,30 +1,65 @@
 import React, { Component } from 'react';
-import { View, } from 'react-native';
+import { View } from 'react-native';
 import firebase from 'firebase';
-import { Header } from './components/common';
+import { Header, Spinner, Button, CardSection } from './components/common';
 import LoginForm from './components/LoginForm';
 
 class App extends Component {
-    componenetWillMount() {
-        firebase.intializeApp({
+    state = { loggedIn: null };
 
-                apiKey: 'AIzaSyC8_c-X01rQayaOVUlsmkr5r0sA2TeYxqs',
-                authDomain: 'authentication-423ff.firebaseapp.com',
-                databaseURL: 'https://authentication-423ff.firebaseio.com',
-                projectId: 'authentication-423ff',
-                storageBucket: 'authentication-423ff.appspot.com',
-                messagingSenderId: '346024549639'
-        });
+    componentWillMount() {
+        firebase.initializeApp({
+    apiKey: 'AIzaSyDwT4xJz4MZ9DHG9O2V2TICPjRZUGFlWyc',
+    authDomain: 'authentication-a1df2.firebaseapp.com',
+    databaseURL: 'https://authentication-a1df2.firebaseio.com',
+    projectId: 'authentication-a1df2',
+    storageBucket: 'authentication-a1df2.appspot.com',
+    messagingSenderId: '87124997868'
+    });
+
+    firebase.auth().onAuthStateChanged((user) => {
+         if (user) {
+             this.setState({ loggedIn: true });
+         } else {
+             this.setState({ loggedIn: false });
+         }
+    });
+}
+
+    renderContent() {
+        switch (this.state.loggedIn) {
+            case true:
+                return (
+                    <CardSection>
+                        <Button onPress={() => firebase.auth().signOut()}>
+                            Log out
+                        </Button>
+                    </CardSection>
+                );
+            case false:
+                return <LoginForm />;
+            default:
+                return (
+                    <View style={styles.loadingStyle}>
+                    <Spinner size="large" />
+                    </View>);
+        }
     }
 
     render() {
         return (
-        <View>
-            <Header headerText="Authenticaion" />
-            <LoginForm />
-        </View>
-    );
+            <View>
+                <Header headerText="Authentication" />
+                {this.renderContent()}
+            </View>
+        );
     }
 }
+
+const styles = {
+    loadingStyle: {
+        marginTop: 240
+    }
+};
 
 export default App;
